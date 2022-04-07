@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+header {
+    background-color: #7451EB;
+    height: 10%;
+}
+
+nav {
+    height: 100%;
+    margin: auto;
+}
+
+.title {
+    color: #FFF;
+    text-align: center;
+    margin: 0 auto;
+    padding: 30px;
+}

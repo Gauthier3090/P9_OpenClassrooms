@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block content %}
+<section>
+    <div class="signin">
+        <div class="title-signin">
+            <h2>Inscrivez-vous maintenant</h2>
+        </div>
+        <input class="button-form" type="button" value="S'inscrire">
+    </div>
+    <div class="signup">
+        <div class="title-signup">
+            <h2>Connectez-vous</h2>
+        </div>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit">Se connecter</button>
+            <p class="error">{{ message }}</p>
+        </form>
+    </div>
+</section>
+{% endblock content %}
