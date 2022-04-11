@@ -21,5 +21,6 @@ urlpatterns = [
     path('', core.views.LoginPage.as_view(template="login.html"), name="login"),
     path('home/', core.views.home, name="home"),
     path('logout/', core.views.logout_user, name="logout"),
+    path('signup/', core.views.signup_page, name='signup'),
     path('admin/', admin.site.urls),
 ]
