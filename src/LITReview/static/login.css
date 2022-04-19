@@ -1,91 +1,76 @@
-section {
+.container-signin {
     display: flex;
-    flex-direction: row;
     height: 100%;
-}
-
-h2 {
-    font-size: 25px;
 }
 
 .signin, .signup {
-    width: 40%;
-    height: 40%;
-    margin: 25px auto;
-    background-color: #7451EB;;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.title-signin, .title-signup {
-    text-align: center;
-    color: #FFF;
-}
-
-.title-signup {
-    height: 25%;
-    padding-top: 25px;
-}
-
-.button-form {
-    margin: 50px auto;
-    background: none;
-    width: 35%;
-    height: 15%;
-    border: 1px solid #FFF;
-    color: #FFF;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-form {
+    height: 300px;
+    margin: 150px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    justify-items: center;
+    gap: 20px;
+    background: linear-gradient(to right, #d31027, #ea384d);
 }
 
-input {
-    height: 35px;
-    width: 35%;
+.title-login {
+    margin: 10px auto;
+    color: #FFF;
+    width: 400px;
     text-align: center;
     font-size: 15px;
-    margin: 5px;
 }
 
-input, button {
-    margin-top: 15px;
-}
-
-button {
-    height: 15%;
-    width: 35%;
-    border: 1px solid #FFF;
-    background: none;
-    font-size: 20px;
+.link-signup {
     color: #FFF;
-    margin-top: 15px;
+    border: 2px solid #FFF;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
     cursor: pointer;
 }
 
-button:hover, input[type="button"]:hover {
-    border: 2px solid #FFF;
+.link-signup:hover {
+   font-weight: bold;
 }
 
-label {
-    display: none;
+.input-login {
+    background: none;
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 5px;
+    margin-bottom: 15px;
+    color: #FFF;
 }
 
-p {
+.input-login::placeholder {
+    color: #FFF;
     text-align: center;
-    width: 100%;
-    height: auto
+}
+
+.button-signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    background: none;
+    border: 1px solid white;
+    padding: 10px 20px;
+    margin: 0 auto;
+    color: #FFF;
 }
 
 .error {
-    margin-top: 35px;
+    padding: 10px 20px;
+    text-align: center;
     color: #FFF;
-    font-weight: bold;
+}
+
+p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
 }

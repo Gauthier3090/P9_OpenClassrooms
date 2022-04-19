@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,14 +7,15 @@
 
 html, body {
     height: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 
-header {
-    background-color: #7451EB;
+.container-nav {
+    background: linear-gradient(to right, #d31027, #ea384d);
     height: 10%;
 }
 
-nav {
+.navbar {
     height: 100%;
     margin: auto;
 }
@@ -22,4 +25,5 @@ nav {
     text-align: center;
     margin: 0 auto;
     padding: 30px;
+    font-size: 30px;
 }
