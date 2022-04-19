@@ -1,22 +1,22 @@
-form, p {
+.form-signup, p {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 40%;
-    height: 50%;
-    margin: 0 auto;
-    background-color: #7451EB;
+    height: 60%;
+    margin: 50px auto;
 }
 
-label, ul, .helptext {
-    display: none;
+.form-signup {
+    background: linear-gradient(to right, #d31027, #ea384d);
 }
 
-span {
-    display: block;
+.link-return {
+    text-decoration: none;
+    color: #FFF;
 }
 
-ul {
+.helptext {
     display: none;
 }
 
@@ -25,23 +25,17 @@ input, button {
     height: 35px;
 }
 
-input {
-    margin: 0px;
-    padding: 0px;
-}
-
-button {
+.button-signup{
     border: 1px solid #FFF;
     background: none;
-    font-size: 20px;
+    font-size: 15px;
     color: #FFF;
     margin-top: 15px;
     cursor: pointer;
 }
 
-h2 {
+.title-signup {
     text-align: center;
-    background-color: #7451EB;
     color: #FFF;
     margin: 25px auto;
     width: 40%;
