@@ -2,7 +2,6 @@ from django.views.generic import View
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
 from core.forms import LoginForm, SignForm
 
 # Create your views here.
@@ -20,8 +19,8 @@ class LoginPage(View):
         form = self.form(request.POST)
         if form.is_valid():
             user = authenticate(
-                username = form.cleaned_data["username"],
-                password = form.cleaned_data["password"],
+                username=form.cleaned_data["username"],
+                password=form.cleaned_data["password"],
             )
             if user is not None:
                 login(request, user)

@@ -3,11 +3,11 @@
     {% if form.errors %}
         {{ form.errors }}
     {% endif %}
-    <form class="form-signup" method="post" action="/home/">
+    <form class="signup-form" method="post" action="/home/">
         <h2 class="title-signup">Inscription</h2>
         {{ form.as_p }}
         {% csrf_token %}
         <button class="button-signup" type="submit">S’inscrire</button>
-        <button class="button-signup" type="button"> <a class="link-return" href="{% url 'login' %}">Retourner</a></button>
+        <a class="link-return" href="{% url 'login' %}">Retourner</a>
     </form>
 {% endblock content %}

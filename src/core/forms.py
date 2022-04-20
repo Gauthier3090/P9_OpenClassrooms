@@ -17,9 +17,9 @@ class SignForm(UserCreationForm):
     username = forms.CharField(max_length=50, widget=forms.TextInput(
         attrs={"placeholder": "Nom d'utilisateur", "class": "input-login"}),
         label="")
-    password1 = forms.CharField(label=(""), widget=forms.PasswordInput(
+    password1 = forms.CharField(label="", widget=forms.PasswordInput(
         attrs={"placeholder": "Mot de passe", "class": "input-login"}))
-    password2 = forms.CharField(label=(""), widget=forms.PasswordInput(
+    password2 = forms.CharField(label="", widget=forms.PasswordInput(
             attrs={"placeholder": "Confirmez votre mot de passe", "class": "input-login"}))
 
     class Meta(UserCreationForm.Meta):

@@ -8,10 +8,10 @@
 html, body {
     height: 100%;
     font-family: 'Roboto', sans-serif;
+    background: #67BE4B;
 }
 
 .container-nav {
-    background: linear-gradient(to right, #d31027, #ea384d);
     height: 10%;
 }
 
