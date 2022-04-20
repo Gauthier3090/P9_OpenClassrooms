@@ -1,13 +1,13 @@
 {% extends 'index.html' %}
 {% block content %}
-    <form class="signup-form" method="post" action="/home/">
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+    <form class="signup-form" method="post" action="{% url 'signup' %}">
         <h2 class="title-signup">Inscription</h2>
         {{ form.as_p }}
         {% csrf_token %}
         <button class="button-signup" type="submit">S’inscrire</button>
         <a class="link-return" href="{% url 'login' %}">Retourner</a>
-        {% if form.errors %}
-            {{ form.errors }}
-        {% endif %}
     </form>
 {% endblock content %}
