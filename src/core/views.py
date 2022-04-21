@@ -1,4 +1,4 @@
-from core.forms import LoginForm, SignForm
+from core.forms import FollowersForm, LoginForm, SignForm
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -13,7 +13,8 @@ class LoginPage(View):
     def get(self, request):
         form = self.form
         message = ''
-        return render(request, self.template, context={"form": form, "message": message})
+        return render(request, self.template, context={
+            "form": form, "message": message})
 
     def post(self, request):
         message = ''
@@ -25,9 +26,10 @@ class LoginPage(View):
             )
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('followers')
             message = "Identifiants invalides."
-        return render(request, self.template, context={"form": form, "message": message})
+        return render(request, self.template, context={
+            "form": form, "message": message})
 
 
 def logout_user(request):
@@ -36,19 +38,21 @@ def logout_user(request):
 
 
 @login_required
-def home(request):
-    return render(request, "home.html")
+def followers(request):
+    form = FollowersForm()
+    if request.method == 'POST':
+        form = FollowersForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('followers'))
+    return render(request, "followers.html", context={'form': form})
 
 
 def signup_page(request):
     form = SignForm()
-    print(request.method)
     if request.method == 'POST':
         form = SignForm(request.POST)
-        print(form)
         if form.is_valid():
             form.save()
-            print('success')
             return redirect(reverse('signup'))
-    print('HELP')
     return render(request, 'signup.html', context={'form': form})

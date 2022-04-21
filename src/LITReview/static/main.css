@@ -18,12 +18,39 @@ html, body {
 .navbar {
     height: 100%;
     margin: auto;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.menu {
+    margin: 0 auto;
+    position: absolute;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    column-gap: 40px;
+    right: 50px;
+}
+
+.menu > .item {
+    list-style: none;
+    display: inline-block;
+    margin: 0 auto;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.menu > .item:hover {
+    border-bottom: 1px solid #FFF;
 }
 
 .title {
     color: #FFF;
-    text-align: center;
-    margin: 0 auto;
     padding: 30px;
     font-size: 30px;
+    text-align: center;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
 }

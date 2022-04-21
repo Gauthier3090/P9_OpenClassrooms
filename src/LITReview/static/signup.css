@@ -53,3 +53,10 @@
     text-align: center;
 }
 
+.errorlist > li {
+    list-style: none;
+    font-weight: bold;
+    color: #FF0000;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}

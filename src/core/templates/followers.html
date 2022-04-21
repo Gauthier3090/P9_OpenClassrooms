@@ -1,0 +1,12 @@
+{% block header %}
+    {% include 'index.html' %}
+{% endblock %}
+{% block content %}
+    <form class="form-followers" method="post" action="{% url 'followers' %}">
+        <h2 class="title-form-followers">Suivre d'autres utilisateurs</h2>
+        <div class="form-container">
+            <input type="text" name="follower" id="follower" class="input-followers" placeholder="Nom d'utilisateur">
+            <button class="button-form-followers" type="submit">Envoyer</button>
+        </div>
+    </form>
+{% endblock content %}

@@ -7,17 +7,24 @@
         <link rel="stylesheet" type="text/css" href=" {% static 'main.css' %} ">
         <link rel="stylesheet" type="text/css" href=" {% static 'login.css' %} ">
         <link rel="stylesheet" type="text/css" href=" {% static 'signup.css' %} ">
+        <link rel="stylesheet" type="text/css" href=" {% static 'followers.css' %} ">
         <title>LITReview</title>
     </head>
     <body>
         <header class="container-nav">
-        <nav class="navbar">
-            <h1 class="title">LITReview</h1>
-        </nav>
+            <nav class="navbar">
+                <h1 class="title">LITReview</h1>
+                    {% block content %}
+                        {% if user.is_authenticated %}
+                            <ul class="menu">
+                                <li class="item">Flux</li>
+                                <li class="item">Posts</li>
+                                <li class="item">Abonnements</li>
+                                <li class="item">Se déconnecter</li>
+                            </ul>
+                        {% endif %}
+                    {% endblock content %}
+            </nav>
         </header>
-        {% block content %}{% endblock content %}
-        {% if user.is_authenticated %}
-            <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>
-        {% endif %}
     </body>
 </html>
