@@ -5,8 +5,10 @@
     <form class="form-followers" method="post" action="{% url 'followers' %}">
         <h2 class="title-form-followers">Suivre d'autres utilisateurs</h2>
         <div class="form-container">
-            <input type="text" name="follower" id="follower" class="input-followers" placeholder="Nom d'utilisateur">
+            {{ form.as_p }}
+            {% csrf_token %}
             <button class="button-form-followers" type="submit">Envoyer</button>
+            <p class="error">{{ message }}</p>
         </div>
     </form>
 {% endblock content %}

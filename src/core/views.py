@@ -1,9 +1,9 @@
 from core.forms import FollowersForm, LoginForm, SignForm
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import View
+from core.validators import CheckUser
 
 
 class LoginPage(View):
@@ -13,8 +13,7 @@ class LoginPage(View):
     def get(self, request):
         form = self.form
         message = ''
-        return render(request, self.template, context={
-            "form": form, "message": message})
+        return render(request, self.template, context={"form": form, "message": message})
 
     def post(self, request):
         message = ''
@@ -28,8 +27,7 @@ class LoginPage(View):
                 login(request, user)
                 return redirect('followers')
             message = "Identifiants invalides."
-        return render(request, self.template, context={
-            "form": form, "message": message})
+        return render(request, self.template, context={"form": form, "message": message})
 
 
 def logout_user(request):
@@ -37,15 +35,25 @@ def logout_user(request):
     return redirect('login')
 
 
-@login_required
-def followers(request):
-    form = FollowersForm()
-    if request.method == 'POST':
-        form = FollowersForm(request.POST)
+class FollowersPage(View):
+    template = "followers.html"
+    form = FollowersForm
+
+    def get(self, request):
+        form = self.form
+        message = ''
+        return render(request, self.template, context={"form": form, "message": message})
+
+    def post(self, request):
+        message = ''
+        follow = CheckUser
+        form = self.form(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(reverse('followers'))
-    return render(request, "followers.html", context={'form': form})
+            if follow.username_exists(form.cleaned_data["username"]):
+                message = "La personne a été rajoutée à vos abonnements !"
+                return redirect('followers'l)
+            message = "La personne n'existe pas. Veuillez réessayer !"
+        return render(request, self.template, context={"form": form, "message": message})
 
 
 def signup_page(request):

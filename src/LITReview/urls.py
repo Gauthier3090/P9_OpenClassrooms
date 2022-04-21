@@ -16,10 +16,11 @@ Including another URLconf
 import core.views
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('', core.views.LoginPage.as_view(template="login.html"), name="login"),
-    path('followers/', core.views.followers, name="followers"),
+    path('followers/', login_required(core.views.FollowersPage.as_view(template="followers.html")), name="followers"),
     path('logout/', core.views.logout_user, name="logout"),
     path('signup/', core.views.signup_page, name='signup'),
     path('admin/', admin.site.urls),

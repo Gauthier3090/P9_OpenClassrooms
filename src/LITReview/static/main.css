@@ -54,3 +54,8 @@ html, body {
     margin: 0 auto;
     width: 100%;
 }
+
+.link-logout {
+    text-decoration: none;
+    color: #FFF;
+}
