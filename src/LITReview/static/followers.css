@@ -44,11 +44,56 @@
 .button-form-followers {
     width: 100px;
     height: 15%;
-    background: none;
-    color: #000;
     margin: 8px 0;
     padding: 6px 20px;
-    background-color: #53AF57;
+    background: #53AF57 none;
+    border: none;
+    cursor: pointer;
+    color: #FFF;
+}
+
+.followers-table {
+    width: 640px;
+    border: 1px solid #F1F1F1;
+    background: #FFF;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin: 0 auto;
+}
+
+tr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+tr:not(:first-child) {
+    gap: 440px;
+}
+
+.title-table {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.item-table {
+    vertical-align: center;
+    width: auto;
+    height: auto;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.title-table {
+    width: 100%;
+}
+
+.item-table > input {
+    width: 150px;
+    height: 15%;
+    margin: 8px 0;
+    padding: 6px 20px;
+    background: #53AF57 none;
     border: none;
     cursor: pointer;
     color: #FFF;

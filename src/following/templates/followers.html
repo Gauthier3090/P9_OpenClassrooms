@@ -11,4 +11,17 @@
         </div>
         <p class="error">{{ message }}</p>
     </form>
+     <table class="followers-table">
+     <tr>
+         <td><h2 class="title-table">Abonnements</h2></td>
+     </tr>
+       <tr>
+           {% for i in followers %}
+               <td class="item-table">{{ i }}</td>
+               <td class="item-table">
+                   <input type="submit" value="Se désabonner">
+               </td>
+           {% endfor %}
+       </tr>
+    </table>
 {% endblock content %}
