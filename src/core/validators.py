@@ -1,5 +1,4 @@
 from django.core.exceptions import ValidationError
-from django.contrib.auth import get_user_model
 
 
 class CheckLetter:
@@ -18,11 +17,3 @@ class CheckNumber:
 
     def get_help_text(self) -> str:
         return 'Votre mot de passe doit contenir au moins un chiffre.'
-
-
-class CheckUser:
-    def username_exists(username) -> bool:
-        User = get_user_model()
-        if User.objects.filter(username=username).exists():
-            return True
-        return False
