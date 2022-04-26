@@ -58,6 +58,7 @@
     background: #FFF;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     margin: 0 auto;
+    margin-top: 50px;
 }
 
 tr {
@@ -80,7 +81,6 @@ tr:not(:first-child) {
     vertical-align: center;
     width: auto;
     height: auto;
-    text-transform: uppercase;
     font-weight: bold;
 }
 
@@ -88,7 +88,7 @@ tr:not(:first-child) {
     width: 100%;
 }
 
-.item-table > input {
+.item-follower {
     width: 150px;
     height: 15%;
     margin: 8px 0;
@@ -97,4 +97,20 @@ tr:not(:first-child) {
     border: none;
     cursor: pointer;
     color: #FFF;
+}
+
+.error {
+    text-transform: lowercase;
+    padding: 10px 20px;
+}
+
+.error::first-letter {
+    text-transform: capitalize;
+}
+
+.follower {
+    width: 100%;
+    height: auto;
+    text-transform: uppercase;
+    font-weight: bold;
 }

@@ -11,17 +11,32 @@
         </div>
         <p class="error">{{ message }}</p>
     </form>
-     <table class="followers-table">
-     <tr>
-         <td><h2 class="title-table">Abonnements</h2></td>
-     </tr>
-       <tr>
-           {% for i in followers %}
-               <td class="item-table">{{ i }}</td>
-               <td class="item-table">
-                   <input type="submit" value="Se désabonner">
-               </td>
-           {% endfor %}
-       </tr>
+    <table class="followers-table">
+        <tr>
+            <td><h2 class="title-table">Abonnements</h2></td>
+        </tr>
+        <tr>
+            {% for i in items %}
+                <td class="item-table">{{ i }}</td>
+                <td class="item-table">
+                        <form action="{% url 'followers' %}" method="get">
+                            <button class="item-follower" type="submit" id="{{ i }}" name="unfollow" value="{{ i }}">Se désabonner</button>
+                        </form>
+                </td>
+            {% endfor %}
+        </tr>
+        <td class="item-table">
+            <p class="error">{{ error }}</p>
+        </td>
+    </table>
+    <table class="followers-table">
+        <tr>
+            <td><h2 class="title-table">Abonnés</h2></td>
+        </tr>
+        <tr>
+            {% for i in followers %}
+                <td class="follower">{{ i }}</td>
+            {% endfor %}
+        </tr>
     </table>
 {% endblock content %}
