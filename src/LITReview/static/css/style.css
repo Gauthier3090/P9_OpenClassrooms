@@ -1,0 +1,24 @@
+html, body {
+    height: 100%;
+}
+
+.custom-navbar {
+    background-color: #60656F;
+    color: #FFFFFF;
+}
+
+.custom-body {
+    background-color: #F7F7FF;
+}
+
+.custom-small {
+    color: #FF0000;
+}
+
+input::placeholder {
+    text-align: center;
+}
+
+.form-control {
+    margin: 0 auto;
+}

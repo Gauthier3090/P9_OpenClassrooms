@@ -1,18 +1,32 @@
 {% block header %}
-    {% include 'index.html' %}
+    {% include 'navbar.html' %}
 {% endblock %}
-{% block content %}
-<div class="container">
-    <div class="signup">
-        <h2 class="title-login">Inscrivez-vous maintenant</h2>
-        <a href="/signup/" class="link-signup">S'inscrire</a>
+{% block form-login %}
+    <div class="d-flex align-items-center justify-content-center w-100 h-75">
+        <form class="form-control bg-light w-25 h-25" method="get" action="/signup">
+            <h2 class="text-center m-3">Inscrivez-vous maintenant</h2>
+            <div class="d-flex align-items-center justify-content-center h-25 p-2">
+                <label for="signup"></label>
+                <input type="submit" class="btn  btn-primary w-75" id="signup" value="S'inscrire">
+            </div>
+        </form>
+        <form class="form-control bg-light w-25 h-auto" method="post">
+            <h2 class="text-center m-3">Connectez-vous</h2>
+            <div class="form-group p-1">
+                <label for="username"></label>
+                <input type="text" class="form-control w-75" id="username" placeholder="Entrez votre pseudo">
+            </div>
+            <div class=" form-group p-1">
+                <label for="password"></label>
+                <input type="password" class="form-control w-75" id="password" placeholder="Entrez votre mot de passe">
+            </div>
+            <div class="d-flex justify-content-center p-2">
+                <small id="error" class="form-text custom-small"></small>
+            </div>
+            <div class="d-flex justify-content-end">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary m-2">Se connecter</button>
+            </div>
+        </form>
     </div>
-    <form class="form-login" method="post">
-        <h2 class="title-login">Se connecter</h2>
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="button">Se connecter</button>
-        <p class="error">{{ message }}</p>
-    </form>
-</div>
-{% endblock content %}
+{% endblock form-login %}
