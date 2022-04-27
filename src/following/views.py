@@ -12,31 +12,40 @@ class FollowersPage(View):
 
     def get(self, request):
         form = self.form
-        error = ''
         username = request.GET.get('unfollow')
         if username:
-            error = unfollow_user(username)
-        print(error)
+            unfollow_user(username)
         context = {
             "form": form,
-            "error": error,
-            "items": self.all(request.user.id),
-            "followers": self.who_follow_me(request.user.id)
+            "followers": self.followers(request.user.id),
+            "subscribers": self.subscribers(request.user.id)
         }
+        print(context)
         return render(request, self.page, context=context)
 
     def post(self, request):
         form = self.form(request.POST)
+        error = ""
+        success = ""
         if form.is_valid():
             username = form.cleaned_data["username"]
             if username_exists(username):
                 error = create_follower(username, request.user.id)
+                if error is "":
+                    success = "La personne a été rajoutée à vos abonnements !"
             else:
                 error = "La personne n'existe pas. Veuillez réessayer !"
-        return render(request, self.page, context={"form": form, "message": error, "items": self.all(request.user.id)})
+        context = {
+            "form": form,
+            "error": error,
+            "success": success,
+            "followers": self.followers(request.user.id),
+            "subscribers": self.subscribers(request.user.id)
+        }
+        return render(request, self.page, context=context)
 
     @staticmethod
-    def all(user_id):
+    def followers(user_id):
         tab = []
         followers = Follower.objects.all().filter(user_id=user_id)
         for follower in followers:
@@ -44,7 +53,7 @@ class FollowersPage(View):
         return tab
 
     @staticmethod
-    def who_follow_me(user_id):
+    def subscribers(user_id):
         tab = []
         followers = Follower.objects.all().filter(followed_user_id=user_id)
         for follower in followers:

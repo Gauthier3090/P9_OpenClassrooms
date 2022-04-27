@@ -1,0 +1,16 @@
+<div class="d-flex flex-column justify-content-center align-items-center w-50 h-25 m-auto mt-5 bg-light border">
+    <h2 class="text-center mb-5">Abonnés</h2>
+    <table class="table table-bordered table-dark w-75">
+        <tbody>
+            <tr>
+                {% if not subscribers %}
+                    <p class="fw-bold lead">Personne n'est abonnée à vous !</p>
+                {% endif %}
+                {% for i in subscribers %}
+                    <tr>
+                        <td scope="row" class="text-start align-middle">{{ i }}</td>
+                    </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>

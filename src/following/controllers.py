@@ -17,16 +17,16 @@ def create_follower(followed_user: str, user_id: int) -> str:
         return "La personne est déjà dans vos abonnements !"
     except Exception as e:
         print(e)
-        if follower.id != user_id:
-            Follower.objects.create(followed_user_id=follower.id, user_id=user_id)
-            return "La personne a été rajoutée à vos abonnements !"
-        else:
+        if user_id == follower.id:
             return "Vous ne pouvez pas vous abonner à vous même !"
+        else:
+            Follower.objects.create(followed_user_id=follower.id, user_id=user_id)
+            return ""
 
-def unfollow_user(username: str) -> str:
+
+def unfollow_user(username: str) -> None:
     try:
         follower = User.objects.get(username=username)
         Follower.objects.filter(followed_user_id=follower.id).delete()
-        return "La personne a été supprimée de vos abonnements !"
     except Exception as e:
-        return f"Error : {e}"
+        print(e)

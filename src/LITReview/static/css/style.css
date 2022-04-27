@@ -15,6 +15,10 @@ html, body {
     color: #FF0000;
 }
 
+.custom-success {
+    color: #008000;
+}
+
 input::placeholder {
     text-align: center;
 }

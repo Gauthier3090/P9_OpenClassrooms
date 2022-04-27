@@ -2,16 +2,21 @@
     <h2 class="text-center mb-5">Abonnements</h2>
     <table class="table table-bordered table-dark w-75">
         <tbody>
-            <tr>
-                {% for i in items %}
+            {% if not followers %}
+                <tr>
+                    <p class="fw-bold lead">Vous n'êtes abonné à personne !</p>
+                </tr>
+            {% endif %}
+            {% for i in followers %}
+                <tr>
                     <td scope="row" class="text-start align-middle">{{ i }}</td>
                     <td scope="row" class="text-end">
                         <form action="{% url 'followers' %}" method="get" class="form-control bg-transparent border-0">
                             <button class="btn btn-primary" type="submit" name="unfollow" value="{{ i }}">Se désabonner</button>
                         </form>
                     </td>
-                {% endfor %}
-            </tr>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
