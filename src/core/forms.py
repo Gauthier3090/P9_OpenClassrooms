@@ -23,11 +23,3 @@ class SignForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ('username', 'password1', 'password2')
-
-
-class FollowersForm(forms.Form):
-    username = forms.CharField(max_length=50, widget=forms.TextInput(
-        attrs={
-            "placeholder": "Nom d'utilisateur",
-            "class": "input-followers"}),
-                               label="")

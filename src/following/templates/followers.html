@@ -1,42 +1,9 @@
 {% block header %}
     {% include 'navbar.html' %}
-{% endblock %}
-{% block content %}
-    <form class="form-followers" method="post" action="{% url 'followers' %}">
-        <h2 class="title-form-followers">Suivre d'autres utilisateurs</h2>
-        <div class="form-container">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button class="button-form-followers" type="submit">Envoyer</button>
-        </div>
-        <p class="error">{{ message }}</p>
-    </form>
-    <table class="followers-table">
-        <tr>
-            <td><h2 class="title-table">Abonnements</h2></td>
-        </tr>
-        <tr>
-            {% for i in items %}
-                <td class="item-table">{{ i }}</td>
-                <td class="item-table">
-                        <form action="{% url 'followers' %}" method="get">
-                            <button class="item-follower" type="submit" id="{{ i }}" name="unfollow" value="{{ i }}">Se désabonner</button>
-                        </form>
-                </td>
-            {% endfor %}
-        </tr>
-        <td class="item-table">
-            <p class="error">{{ error }}</p>
-        </td>
-    </table>
-    <table class="followers-table">
-        <tr>
-            <td><h2 class="title-table">Abonnés</h2></td>
-        </tr>
-        <tr>
-            {% for i in followers %}
-                <td class="follower">{{ i }}</td>
-            {% endfor %}
-        </tr>
-    </table>
-{% endblock content %}
+{% endblock header %}
+{% block search_form %}
+    {% include 'search_followers.html' %}
+{% endblock search_form %}
+{% block table_followers %}
+    {% include 'table_followers.html' %}
+{% endblock table_followers %}

@@ -1,4 +1,4 @@
-from core.forms import FollowersForm
+from following.forms import FollowersForm
 from django.shortcuts import render
 from django.views.generic import View
 from core.models import User
