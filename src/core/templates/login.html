@@ -13,18 +13,13 @@
         <form class="form-control bg-light w-25 h-auto" method="post">
             <h2 class="text-center m-3">Connectez-vous</h2>
             <div class="form-group p-1">
-                <label for="username"></label>
-                <input type="text" class="form-control w-75" id="username" placeholder="Entrez votre pseudo">
-            </div>
-            <div class=" form-group p-1">
-                <label for="password"></label>
-                <input type="password" class="form-control w-75" id="password" placeholder="Entrez votre mot de passe">
+              {% csrf_token %}
+              {{ form }}
             </div>
             <div class="d-flex justify-content-center p-2">
-                <small id="error" class="form-text custom-small"></small>
+                <small id="error" class="custom-small">{{ message }}</small>
             </div>
             <div class="d-flex justify-content-end">
-                {% csrf_token %}
                 <button type="submit" class="btn btn-primary m-2">Se connecter</button>
             </div>
         </form>

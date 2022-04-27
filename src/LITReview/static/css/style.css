@@ -22,3 +22,7 @@ input::placeholder {
 .form-control {
     margin: 0 auto;
 }
+
+.errorlist {
+    display: none;
+}

@@ -1,3 +1,5 @@
+from django.contrib import messages
+
 from core.forms import LoginForm, SignForm
 from django.contrib.auth import authenticate, logout, login
 from django.shortcuts import redirect, render
@@ -38,13 +40,15 @@ class SignupPage(View):
 
     def post(self, request):
         form = self.form(request.POST)
+        message = ""
         if form.is_valid():
             form.save()
-            return redirect('signup')
-        return render(request, 'signup.html', context={'form': form})
+            message = "Votre compte a été enregistré"
+        return render(request, self.template, context={"form": form, "message": message})
 
 
 class Logout(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         logout(request)
         return redirect('login')

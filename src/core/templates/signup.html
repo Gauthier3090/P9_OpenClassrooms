@@ -5,26 +5,28 @@
   <div class="d-flex justify-content-center w-100 m-5">
     <form class="form-control bg-light w-25" method="post">
       <h2 class="text-center m-3">Inscrivez-vous</h2>
-      <div class="form-group p-1">
-        <label for="username"></label>
-        <input type="text" class="form-control w-75" id="username" placeholder="Entrez votre pseudo">
-      </div>
-      <div class="form-group p-1">
-        <label for="password"></label>
-        <input type="password" class="form-control w-75" id="password" placeholder="Entrez votre mot de passe">
-      </div>
-      <div class="form-group p-1">
-        <label for="passwordConfirm"></label>
-        <input type="password" class="form-control w-75" id="passwordConfirm" placeholder="Confirmez votre mot de passe">
-      </div>
-      <div class="d-flex justify-content-center p-2">
-        <small id="emailHelp" class="form-text custom-small"></small>
-      </div>
-      <div class="d-flex justify-content-end">
-        <a class="btn btn-primary m-2" href="{% url 'login' %}">Retourner</a>
         {% csrf_token %}
-        <button type="submit" class="btn btn-primary m-2">S'inscrire</button>
-      </div>
+        {{ form.as_p }}
+      <div class="d-flex justify-content-center p-2">
+        <small id="emailHelp" class="custom-small">
+            {% if form.errors %}
+               {% for field in form %}
+                    {% for error in field.errors %}
+                      <small class="d-block text-center">{{ error }}</small>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            </small>
+        </div>
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-primary m-2" href="{% url 'login' %}">Retourner</a>
+            <button type="submit" class="btn btn-primary m-2">S'inscrire</button>
+        </div>
+        {% if message %}
+            <div class="alert alert-success">
+             <strong>Succès !</strong> {{ message }}
+            </div>
+        {% endif %}
     </form>
   </div>
 {% endblock form-signup %}
