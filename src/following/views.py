@@ -31,7 +31,7 @@ class FollowersPage(View):
             username = form.cleaned_data["username"]
             if username_exists(username):
                 error = create_follower(username, request.user.id)
-                if error is "":
+                if error == "":
                     success = "La personne a été rajoutée à vos abonnements !"
             else:
                 error = "La personne n'existe pas. Veuillez réessayer !"
