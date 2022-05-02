@@ -20,7 +20,6 @@ class FollowersPage(View):
             "followers": self.followers(request.user.id),
             "subscribers": self.subscribers(request.user.id)
         }
-        print(context)
         return render(request, self.page, context=context)
 
     def post(self, request):

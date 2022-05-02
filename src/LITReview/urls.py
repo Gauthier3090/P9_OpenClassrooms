@@ -15,6 +15,7 @@ Including another URLconf
 """
 import core.views
 import following.views
+import ticketing.views
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.decorators import login_required
@@ -24,5 +25,6 @@ urlpatterns = [
     path('followers/', login_required(following.views.FollowersPage.as_view()), name="followers"),
     path('logout/', core.views.Logout.as_view(), name="logout"),
     path('signup/', core.views.SignupPage.as_view(), name='signup'),
+    path('review/', ticketing.views.ReviewPage.as_view(), name='review'),
     path('admin/', admin.site.urls),
 ]
