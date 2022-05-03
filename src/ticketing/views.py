@@ -4,23 +4,19 @@ from ticketing.forms import ReviewForm, TicketForm
 
 class ReviewPage(View):
     template = "review.html"
-    form = TicketForm
-    form_review = ReviewForm
 
     def get(self, request):
-        return render(request, self.template, context={"form": self.form, "review": self.form_review})
+        review_form = ReviewForm(request.GET, prefix="review")
+        ticket_form = TicketForm(request.GET, prefix="ticket")
+        return render(request, self.template, context={"ticket": ticket_form, "review": review_form})
 
     def post(self, request):
-        form1 = ReviewForm(request.POST)
-        form2 = TicketForm(request.POST)
-        if form1.is_valid():
-            print("ok")
+        review_form = ReviewForm(request.POST, prefix="review")
+        ticket_form = TicketForm(request.POST, prefix="ticket")
+        if all([review_form.is_valid(), ticket_form.is_valid()]):
+            print("OK")
         else:
-            print("non ok")
-        if form2.is_valid():
-            print("ok 1")
-        else:
-            print("non ok")
-        if form1.is_valid() and form2.is_valid():
-            print("deux ok")
-        return render(request, self.template, context={"form": form1, "review": form2})
+            print(review_form.is_valid(), ticket_form.is_valid())
+            review_form = ReviewForm(prefix="review")
+            ticket_form = TicketForm(prefix="ticket")
+        return render(request, self.template, context={"ticket": ticket_form, "review": review_form})
