@@ -26,5 +26,6 @@ urlpatterns = [
     path('logout/', core.views.Logout.as_view(), name="logout"),
     path('signup/', core.views.SignupPage.as_view(), name='signup'),
     path('review/', ticketing.views.ReviewPage.as_view(), name='review'),
+    path('flux/', core.views.FluxPage.as_view(), name='flux'),
     path('admin/', admin.site.urls),
 ]

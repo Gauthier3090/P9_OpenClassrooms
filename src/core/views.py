@@ -52,3 +52,10 @@ class Logout(View):
     def get(request):
         logout(request)
         return redirect('login')
+
+
+class FluxPage(View):
+    template = "flux.html"
+
+    def get(self, request):
+        return render(request, self.template)

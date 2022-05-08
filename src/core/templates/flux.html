@@ -1,0 +1,13 @@
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock header %}
+{% block flux %}
+    <div class="d-flex justify-content-center align-items-center gap-5 h-25">
+        <form action="/review/">
+            <button class="btn btn-primary">Demander une critique</button>
+        </form>
+        <form action="/review/">
+            <button class="btn btn-primary">Créer une critique</button>
+        </form>
+    </div>
+{% endblock flux %}
