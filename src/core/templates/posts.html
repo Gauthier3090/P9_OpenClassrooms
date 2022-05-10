@@ -58,7 +58,7 @@
                 <img class="img-fluid" src="{% static "" %}{{ ticket.image }}" alt="couverture livre">
             </div>
             <div class="d-flex justify-content-end gap-3 m-2">
-                <form action="">
+                <form action="{% url 'modify' ticket.id %}">
                     <button class="btn btn-primary">Modifier</button>
                 </form>
                 <button class="btn btn-primary h-25">Supprimer</button>

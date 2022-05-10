@@ -1,9 +1,21 @@
 import datetime
 
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, UpdateView
+from django.urls import reverse
 from ticketing.forms import ReviewForm, TicketForm
 from ticketing.models import Review, Ticket
+
+
+class TicketModifyPage(UpdateView):
+    model = Ticket
+    fields = ["id"]
+    form = TicketForm
+    template = "modify-ticket.html"
+
+    def get_success_url(self):
+        return reverse('modify', args=(self.object.id,))
 
 
 class ReviewPage(View):

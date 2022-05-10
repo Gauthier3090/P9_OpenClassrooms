@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout/', core.views.Logout.as_view(), name="logout"),
     path('signup/', core.views.SignupPage.as_view(), name='signup'),
     path('review/', login_required(ticketing.views.ReviewPage.as_view()), name='review'),
+    path('<pk>/modify/', login_required(ticketing.views.TicketModifyPage.as_view()), name='modify'),
     path('flux/', login_required(core.views.FluxPage.as_view()), name='flux'),
     path('posts/', login_required(core.views.PostPage.as_view()), name='posts'),
     path('admin/', admin.site.urls),

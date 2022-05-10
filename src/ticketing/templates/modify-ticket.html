@@ -1,0 +1,11 @@
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock header %}
+{% block modify-ticket %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="article container-fluid w-50 mt-5">
+            {% csrf_token %}
+            {% object.name %}
+        </div>
+    </form>
+{% endblock modify-ticket%}
