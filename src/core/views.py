@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, logout, login
 from django.shortcuts import redirect, render
 from django.views.generic import View
 
+from ticketing.models import Review, Ticket
+
 
 class LoginPage(View):
     template = "login.html"
@@ -59,3 +61,13 @@ class FluxPage(View):
 
     def get(self, request):
         return render(request, self.template)
+
+
+class PostPage(View):
+    template = "posts.html"
+
+    def get(self, request):
+        reviews = Review.objects.all()
+        tickets = Ticket.objects.all()
+        return render(request, self.template, context={"tickets": tickets, "reviews": reviews})
+

@@ -25,7 +25,8 @@ urlpatterns = [
     path('followers/', login_required(following.views.FollowersPage.as_view()), name="followers"),
     path('logout/', core.views.Logout.as_view(), name="logout"),
     path('signup/', core.views.SignupPage.as_view(), name='signup'),
-    path('review/', ticketing.views.ReviewPage.as_view(), name='review'),
-    path('flux/', core.views.FluxPage.as_view(), name='flux'),
+    path('review/', login_required(ticketing.views.ReviewPage.as_view()), name='review'),
+    path('flux/', login_required(core.views.FluxPage.as_view()), name='flux'),
+    path('posts/', login_required(core.views.PostPage.as_view()), name='posts'),
     path('admin/', admin.site.urls),
 ]

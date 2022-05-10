@@ -130,6 +130,7 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'LITReview/static'),
+    os.path.join(BASE_DIR, 'LITReview/static/images'),
 )
 
 # Default primary key field type
