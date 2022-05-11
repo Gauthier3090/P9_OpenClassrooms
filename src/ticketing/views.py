@@ -1,22 +1,32 @@
 import datetime
-
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View, UpdateView
-from django.urls import reverse
 from ticketing.forms import ReviewForm, TicketForm
 from ticketing.models import Review, Ticket
 
 
 class TicketModifyPage(UpdateView):
     model = Ticket
-    fields = ["id"]
-    form = TicketForm
-    template = "modify-ticket.html"
+    fields = ['title', 'description', 'image']
+    template_name = "modify-ticket.html"
 
-    def get_success_url(self):
-        return reverse('modify', args=(self.object.id,))
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ticket = Ticket.objects.get(id=self.object.pk)
+        context['ticket'] = ticket
+        return context
 
+    def post(self, request, **kwargs):
+        ticket_form = TicketForm(request.POST, request.FILES)
+        self.object = self.get_object()
+        if ticket_form.is_valid():
+            title = ticket_form.cleaned_data["title"]
+            description = ticket_form.cleaned_data["description"]
+            image = ticket_form.cleaned_data["image"]
+            print(image)
+            Ticket.objects.filter(id=self.object.id).update(title=title, description=description, image=image)
+            print(self.object.image)
+        return super(TicketModifyPage, self).post(request, **kwargs)
 
 class ReviewPage(View):
     template = "review.html"
@@ -58,5 +68,5 @@ class ReviewPage(View):
             "success": success,
             "error_review": error_review,
             "error_ticket": error_ticket
-            }
+        }
         return render(request, self.template, context=context)

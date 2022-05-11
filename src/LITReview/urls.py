@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 import core.views
 import following.views
 import ticketing.views
@@ -30,4 +32,4 @@ urlpatterns = [
     path('flux/', login_required(core.views.FluxPage.as_view()), name='flux'),
     path('posts/', login_required(core.views.PostPage.as_view()), name='posts'),
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

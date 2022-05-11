@@ -70,4 +70,3 @@ class PostPage(View):
         reviews = Review.objects.all()
         tickets = Ticket.objects.all()
         return render(request, self.template, context={"tickets": tickets, "reviews": reviews})
-

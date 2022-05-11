@@ -2,10 +2,14 @@
     {% include 'navbar.html' %}
 {% endblock header %}
 {% block modify-ticket %}
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" method="post">
         <div class="article container-fluid w-50 mt-5">
+            <h3 class="text-center">Modifier votre ticket</h3>
             {% csrf_token %}
-            {% object.name %}
+            {{form.as_p}}
+            <div class="d-flex justify-content-end">
+                <input class="form-control m-2 btn btn-primary" type="submit" value="Envoyer">
+            </div>
         </div>
     </form>
 {% endblock modify-ticket%}
