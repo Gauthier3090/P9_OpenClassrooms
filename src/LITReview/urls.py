@@ -23,7 +23,7 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    path('', core.views.LoginPage.as_view(), name="login"),
+    path('login/', core.views.LoginPage.as_view(), name="login"),
     path('followers/', login_required(following.views.FollowersPage.as_view()), name="followers"),
     path('logout/', core.views.Logout.as_view(), name="logout"),
     path('signup/', core.views.SignupPage.as_view(), name='signup'),
@@ -32,4 +32,7 @@ urlpatterns = [
     path('flux/', login_required(core.views.FluxPage.as_view()), name='flux'),
     path('posts/', login_required(core.views.PostPage.as_view()), name='posts'),
     path('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
