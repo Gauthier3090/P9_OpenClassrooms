@@ -7,7 +7,6 @@
         <div class="article container-fluid w-50 mt-5">
             <h3 class="text-center">Modifier votre ticket</h3>
             {% csrf_token %}
-            <form action=""></form>
             <label class="form-label" for="{{ form.title.id_for_label }}">Titre</label>
             <input id="{{ form.title.id_for_label }}" name="title" maxlength="128" class="form-control m-2 text-center"
                    type="text" value="{{form.title.value}}">

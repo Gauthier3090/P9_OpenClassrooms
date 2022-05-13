@@ -1,0 +1,60 @@
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock header %}
+{% block modify-ticket %}
+    {% load static %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="article container-fluid w-50 mt-5 p-5">
+            <h3 class="text-center mb-5">Modifier votre critique</h3>
+            <div class="border border-dark">
+                <p class="m-3">Vous êtes en train de poster en réponse à</p>
+                <div class="d-flex border border-dark m-5 flex-column">
+                    <p class="m-2">{{ ticket.user }} a demandé une critique</p>
+                    <p class="m-2">{{ ticket.title }}</p>
+                    <p class="m-2">{{ ticket.description }}</p>
+                    <div class="col-md-3 m-2">
+                        <img class="img-fluid" src="{% static "" %}{{ ticket.image }}" alt="{{ ticket.title }}">
+                    </div>
+                </div>
+                <div class="d-flex flex-column border-top border-dark">
+                    <p class="m-3">Critique</p>
+                    <label class="form-label m-3" for="{{ form.headline.id_for_label }}">Titre</label>
+                    <input class="form-control w-75" name="headline" id="{{ form.headline.id_for_label }}" type="text" value="{{ form.headline.value }}">
+                    <label class="form-label m-3" for="rate">Note</label>
+                    <div id="rate" class="d-flex form-control justify-content-center bg-transparent border-0 gap-5">
+                        <div>
+                            <input type="radio" id="rate-0" name="rating" value="0" {% if review.rating == 0 %} checked {% endif %}>
+                            <label for="rate-0">0</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="rate-1" name="rating" value="1" {% if review.rating == 1 %} checked {% endif %}>
+                            <label for="rate-1">1</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="rate-2" name="rating" value="2" {% if review.rating == 2 %} checked {% endif %}>
+                            <label for="rate-2">2</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="rate-3" name="rating" value="3" {% if review.rating == 3 %} checked {% endif %}>
+                            <label for="rate-3">3</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="rate-4" name="rating" value="4" {% if review.rating == 4 %} checked {% endif %}>
+                            <label for="rate-4">4</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="rate-5" name="rating" value="5" {% if review.rating == 5 %} checked {% endif %}>
+                            <label for="rate-5">5</label>
+                        </div>
+                    </div>
+                    <label class="form-label m-3" for="{{ form.body.id_for_label }}">Commentaire</label>
+                    <textarea name="body" id="{{ form.body.id_for_label }}" class="form-control w-75" type="text" rows="13">{{ form.body.value }}</textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <input class="form-control m-3 btn btn-primary w-25" type="submit" value="Envoyer">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock modify-ticket%}

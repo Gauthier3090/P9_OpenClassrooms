@@ -5,6 +5,33 @@ from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
 
 
+class ReviewModifyPage(UpdateView):
+    model = Review
+    fields = ['headline', 'rating', 'body']
+    template_name = "modify-review.html"
+    object = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        review = Review.objects.get(id=self.object.pk)
+        ticket = Ticket.objects.get(review__user_id=review.id)
+        context['review'] = review
+        context['ticket'] = ticket
+        return context
+
+    def post(self, request, **kwargs):
+        review_form = ReviewForm(request.POST)
+        self.object = self.get_object()
+        if review_form.is_valid():
+            title = review_form.cleaned_data["title"]
+            rate = review_form.cleaned_data["rate"]
+            comment = review_form.cleaned_data["comment"]
+            Review.objects.filter(id=self.object.id).update(headline=title, rating=rate, body=comment)
+        else:
+            print(review_form.errors)
+        return super(ReviewModifyPage, self).post(request, **kwargs)
+
+
 class TicketModifyPage(UpdateView):
     model = Ticket
     fields = ['title', 'description', 'image']
