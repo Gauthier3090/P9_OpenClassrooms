@@ -1,8 +1,20 @@
 import datetime
 from django.shortcuts import render
-from django.views.generic import View, UpdateView
+from django.views.generic import View, UpdateView, DeleteView
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
+
+
+class ReviewDeletePage(DeleteView):
+    model = Review
+    template_name = "review_confirm_delete.html"
+    success_url = "/posts/"
+
+
+class TicketDeletePage(DeleteView):
+    model = Ticket
+    template_name = "ticket_confirm_delete.html"
+    success_url = "/posts/"
 
 
 class ReviewModifyPage(UpdateView):
@@ -14,7 +26,7 @@ class ReviewModifyPage(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         review = Review.objects.get(id=self.object.pk)
-        ticket = Ticket.objects.get(review__user_id=review.id)
+        ticket = Ticket.objects.get(id=review.id)
         context['review'] = review
         context['ticket'] = ticket
         return context
@@ -40,7 +52,7 @@ class TicketModifyPage(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        ticket = Ticket.objects.get(id=self.object.pk)
+        ticket = Ticket.objects.get(id=self.object.id)
         context['ticket'] = ticket
         return context
 

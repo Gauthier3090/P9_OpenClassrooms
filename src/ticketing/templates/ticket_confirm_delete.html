@@ -1,0 +1,10 @@
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock header %}
+{% block confirm %}
+    <form method="post">
+        {% csrf_token %}
+        <p>Voulez-vous supprimer le ticket suivant ? "{{ object.title }}"?</p>
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock confirm %}
