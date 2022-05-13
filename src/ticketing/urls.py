@@ -4,5 +4,5 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path("review/create/", login_required(ReviewPage.as_view()), name="review"),
-    path('ticket/<pk>/edit/', login_required(TicketModifyPage.as_view()), name='modify'),
+    path('ticket/<pk>/edit/', login_required(TicketModifyPage.as_view()), name="edit"),
 ]

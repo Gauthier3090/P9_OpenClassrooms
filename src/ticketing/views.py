@@ -1,14 +1,15 @@
 import datetime
 from django.shortcuts import render
 from django.views.generic import View, UpdateView
-from ticketing.forms import ReviewForm, TicketForm
-from ticketing.models import Review, Ticket
+from .forms import ReviewForm, TicketForm
+from .models import Review, Ticket
 
 
 class TicketModifyPage(UpdateView):
     model = Ticket
     fields = ['title', 'description', 'image']
     template_name = "modify-ticket.html"
+    object = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -23,10 +24,13 @@ class TicketModifyPage(UpdateView):
             title = ticket_form.cleaned_data["title"]
             description = ticket_form.cleaned_data["description"]
             image = ticket_form.cleaned_data["image"]
-            print(image)
+            if image is None:
+                image = self.object.image
             Ticket.objects.filter(id=self.object.id).update(title=title, description=description, image=image)
-            print(self.object.image)
+        else:
+            print(ticket_form.errors)
         return super(TicketModifyPage, self).post(request, **kwargs)
+
 
 class ReviewPage(View):
     template = "review.html"
