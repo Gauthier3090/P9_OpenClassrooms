@@ -3,7 +3,7 @@
 {% endblock %}
 {% block form-login %}
     <div class="d-flex align-items-center justify-content-center w-100 h-75">
-        <form class="form-control bg-light w-25 h-25" method="get" action="/signup/">
+        <form class="form-control bg-light w-25 h-25" method="get" action="{% url 'signup' %}">
             <h2 class="text-center m-3">Inscrivez-vous maintenant</h2>
             <div class="d-flex align-items-center justify-content-center h-25 p-2">
                 <label for="signup"></label>

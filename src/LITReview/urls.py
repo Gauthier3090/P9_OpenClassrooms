@@ -15,22 +15,15 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-import core.views
-import following.views
-import ticketing.views
+from .views import index
 from django.contrib import admin
-from django.urls import path
-from django.contrib.auth.decorators import login_required
+from django.urls import path, include
 
 urlpatterns = [
-    path('login/', core.views.LoginPage.as_view(), name="login"),
-    path('followers/', login_required(following.views.FollowersPage.as_view()), name="followers"),
-    path('logout/', core.views.Logout.as_view(), name="logout"),
-    path('signup/', core.views.SignupPage.as_view(), name='signup'),
-    path('review/', login_required(ticketing.views.ReviewPage.as_view()), name='review'),
-    path('<pk>/modify/', login_required(ticketing.views.TicketModifyPage.as_view()), name='modify'),
-    path('flux/', login_required(core.views.FluxPage.as_view()), name='flux'),
-    path('posts/', login_required(core.views.PostPage.as_view()), name='posts'),
+    path('', index, name="index"),
+    path('', include("core.urls")),
+    path('following/', include("following.urls")),
+    path('ticketing/', include("ticketing.urls")),
     path('admin/', admin.site.urls),
 ]
 
