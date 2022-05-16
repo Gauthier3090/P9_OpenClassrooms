@@ -2,12 +2,16 @@
 {% load static %}
     <div class="d-flex justify-content-center flex-column border border-dark w-50 m-auto mb-3">
         <div class="d-flex justify-content-between">
-            <p class="text-start p-2">{{ post.user }} a publié un ticket</p>
+            {% if request.user == post.user %}
+                <p class="text-start p-2">Vous avez publié un ticket</p>
+            {% else %}
+                <p class="text-start p-2">{{ post.user }} a publié un ticket</p>
+            {% endif %}
             <p class="text-end p-2">{{ post.time_created }}</p>
         </div>
         <p class="p-2">{{ post.title }}</p>
         <div class="d-flex justify-content-end gap-3 m-2">
-            {% if post.user != request.user %}
+            {% if post.user != request.user and post.ticket_id < 0 %}
                 <form action="{% url 'create-review' post.id %}">
                     <button class="btn btn-primary">Créer une critique</button>
                 </form>

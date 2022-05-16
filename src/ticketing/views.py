@@ -1,5 +1,7 @@
 import datetime
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.generic import View, UpdateView, DeleteView, CreateView
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
@@ -72,7 +74,7 @@ class TicketModifyPage(UpdateView):
 
 
 class ReviewPage(View):
-    template = "review.html"
+    template = "user-review.html"
 
     def get(self, request):
         review_form = ReviewForm(request.GET)
@@ -141,3 +143,26 @@ class CreateReview(CreateView):
         else:
             print(review_form.errors)
         return render(request, self.template, context={"form": review_form, "ticket": ticket})
+
+
+class CreateTicket(View):
+    template = "create-ticket.html"
+
+    def get(self, request):
+        ticket_form = TicketForm(request.GET, request.FILES)
+        return render(request, self.template, context={"ticket": ticket_form})
+
+    def post(self, request):
+        ticket_form = TicketForm(request.POST, request.FILES)
+        if ticket_form.is_valid():
+            title = ticket_form.cleaned_data["title"]
+            description = ticket_form.cleaned_data["description"]
+            image = ticket_form.cleaned_data["image"]
+            time_created = datetime.date.today()
+            ticket = Ticket.objects.create(title=title, description=description, user=request.user,
+                                           image=image, time_created=time_created)
+            ticket.save()
+            return HttpResponseRedirect("flux")
+        else:
+            print(ticket_form.errors)
+        return render(request, self.template, context={"ticket": ticket_form})

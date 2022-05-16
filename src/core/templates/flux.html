@@ -3,10 +3,10 @@
 {% endblock header %}
 {% block flux %}
     <div class="d-flex justify-content-center align-items-center mt-5 gap-5">
-        <form action="">
+        <form action="{% url 'create-ticket' %}">
             <button class="btn btn-primary">Demander une critique</button>
         </form>
-        <form action="{% url 'review' %}">
+        <form action="{% url 'user-review' %}">
             <button class="btn btn-primary">Créer une critique</button>
         </form>
     </div>
