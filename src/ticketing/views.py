@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import render
-from django.views.generic import View, UpdateView, DeleteView
+from django.views.generic import View, UpdateView, DeleteView, CreateView
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
 
@@ -25,8 +25,8 @@ class ReviewModifyPage(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        review = Review.objects.get(id=self.object.pk)
-        ticket = Ticket.objects.get(id=review.id)
+        review = Review.objects.get(pk=self.object.pk)
+        ticket = Ticket.objects.get(id=review.ticket_id)
         context['review'] = review
         context['ticket'] = ticket
         return context
@@ -113,3 +113,31 @@ class ReviewPage(View):
             "error_ticket": error_ticket
         }
         return render(request, self.template, context=context)
+
+
+class CreateReview(CreateView):
+    model = Review
+    form_class = ReviewForm
+    success_url = "/flux"
+    template = "create-review.html"
+    pk_url_kwarg = "pk"
+
+    def get(self, request, pk):
+        review_form = ReviewForm(request.GET)
+        ticket = Ticket.objects.get(pk=pk)
+        return render(request, self.template, context={"form": review_form, "ticket": ticket})
+
+    def post(self, request, pk):
+        review_form = ReviewForm(request.POST)
+        ticket = Ticket.objects.get(pk=pk)
+        if review_form.is_valid():
+            headline = review_form.cleaned_data["headline"]
+            comment = review_form.cleaned_data["comment"]
+            rate = review_form.cleaned_data["rate"]
+            time_created = datetime.date.today()
+            review = Review.objects.create(ticket=ticket, rating=rate, user=request.user, headline=headline,
+                                           body=comment, time_created=time_created)
+            review.save()
+        else:
+            print(review_form.errors)
+        return render(request, self.template, context={"form": review_form, "ticket": ticket})

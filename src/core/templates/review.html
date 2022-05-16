@@ -1,6 +1,6 @@
 {% block review %}
 {% load static %}
-    <div class="d-flex justify-content-center flex-column border border-dark w-50 m-auto">
+    <div class="d-flex justify-content-center flex-column border border-dark w-50 m-auto mb-3">
         <div class="d-flex justify-content-between">
             {% if post.user != request.user %}
                 <p class="text-start p-2">{{ post.user }} a publié une critique</p>

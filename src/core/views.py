@@ -11,21 +11,21 @@ class LoginPage(View):
     template = "login.html"
     form = LoginForm
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         form = self.form
         message = ''
         if request.user.is_authenticated:
             logout(request)
         return render(request, self.template, context={"form": form, "message": message})
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         message = ''
         form = self.form(request.POST)
         if form.is_valid():
             user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password"],)
             if user is not None:
                 login(request, user)
-                return redirect('followers')
+                return redirect("flux")
             message = "Identifiants invalides."
         return render(request, self.template, context={"form": form, "message": message})
 

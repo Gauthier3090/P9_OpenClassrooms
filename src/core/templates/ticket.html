@@ -1,15 +1,17 @@
 {% block ticket %}
 {% load static %}
-    <div class="d-flex justify-content-center flex-column mt-5 border border-dark w-50 m-auto">
+    <div class="d-flex justify-content-center flex-column border border-dark w-50 m-auto mb-3">
         <div class="d-flex justify-content-between">
             <p class="text-start p-2">{{ post.user }} a publié un ticket</p>
             <p class="text-end p-2">{{ post.time_created }}</p>
         </div>
         <p class="p-2">{{ post.title }}</p>
         <div class="d-flex justify-content-end gap-3 m-2">
-            <form action="{% url 'edit-ticket' post.id %}">
-                <button class="btn btn-primary">Créer une critique</button>
-            </form>
+            {% if post.user != request.user %}
+                <form action="{% url 'create-review' post.id %}">
+                    <button class="btn btn-primary">Créer une critique</button>
+                </form>
+            {% endif %}
         </div>
     </div>
 {% endblock ticket %}

@@ -1,0 +1,30 @@
+{% block header %}
+    {% include 'navbar.html' %}
+{% endblock header %}
+{% block create-review %}
+{% load static %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="article container-fluid w-50 mt-5 p-5">
+        <h3 class="text-center mb-5">Modifier votre critique</h3>
+        <div class="border border-dark">
+            <p class="m-3">Vous êtes en train de poster en réponse à</p>
+            <div class="d-flex border border-dark m-5 flex-column">
+                <p class="m-2">{{ ticket.user }} a demandé une critique</p>
+                <p class="m-2">{{ ticket.title }}</p>
+                <p class="m-2">{{ ticket.description }}</p>
+                <div class="col-md-3 m-2">
+                    <img class="img-fluid" src="{% static "" %}{{ ticket.image }}" alt="{{ ticket.title }}">
+                </div>
+            </div>
+            <div class="d-flex flex-column border-top border-dark">
+                <p class="m-3">Critique</p>
+                {{ form }}
+            </div>
+            <div class="d-flex justify-content-end">
+                <input class="form-control m-3 btn btn-primary w-25" type="submit" value="Envoyer">
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock create-review%}
