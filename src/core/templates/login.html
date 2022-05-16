@@ -14,7 +14,7 @@
             <h2 class="text-center m-3">Connectez-vous</h2>
             <div class="form-group p-1">
               {% csrf_token %}
-              {{ form }}
+              {{ form.as_p }}
             </div>
             <div class="d-flex justify-content-center p-2">
                 <small id="error" class="custom-small">{{ message }}</small>

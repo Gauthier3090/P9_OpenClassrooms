@@ -2,7 +2,7 @@
     {% include 'navbar.html' %}
 {% endblock header %}
 {% block flux %}
-    <div class="d-flex justify-content-center align-items-center gap-5 h-25">
+    <div class="d-flex justify-content-center align-items-center mt-5 mb-3 gap-5">
         <form action="">
             <button class="btn btn-primary">Demander une critique</button>
         </form>
@@ -10,4 +10,11 @@
             <button class="btn btn-primary">Créer une critique</button>
         </form>
     </div>
+    {% for post in posts %}
+        {% if post.content_type == "TICKET" %}
+            {% include "ticket.html" %}
+        {% elif post.content_type == "REVIEW" %}
+            {% include "review.html" %}
+        {% endif %}
+    {% endfor %}
 {% endblock flux %}

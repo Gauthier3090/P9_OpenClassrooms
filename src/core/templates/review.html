@@ -1,0 +1,42 @@
+{% block review %}
+{% load static %}
+    <div class="d-flex justify-content-center flex-column border border-dark w-50 m-auto">
+        <div class="d-flex justify-content-between">
+            {% if post.user != request.user %}
+                <p class="text-start p-2">{{ post.user }} a publié une critique</p>
+            {% else %}
+            <p class="text-start p-2">Vous avez publié une critique</p>
+            {% endif %}
+            <p class="text-end p-2">{{ review.time_created }}</p>
+        </div>
+        {% if post.rating == 5 %}
+            <p class="p-2">{{ post.headline }} - ★★★★★</p>
+        {% elif review.rating == 4 %}
+            <p class="p-2">{{ post.headline }} - ★★★★</p>
+        {% elif review.rating == 3 %}
+            <p class="p-2">{{ post.headline }} - ★★★</p>
+        {% elif review.rating == 2 %}
+            <p class="p-2">{{ post.headline }} - ★★</p>
+        {% elif review.rating == 1 %}
+            <p class="p-2">{{ post.headline }} - ★</p>
+        {% else %}
+            <p class="p-2">{{ post.headline }} - 0 étoile</p>
+        {% endif %}
+        <p class="p-2">{{ post.body }}</p>
+        {% for ticket in tickets  %}
+            {% if ticket.id == post.ticket_id %}
+                <div class="border border-dark m-2 p-2">
+                    {% if ticket.user != request.user %}
+                        <p>Ticket - {{ ticket.user }}</p>
+                    {% else %}
+                        <p>Ticket - Vous</p>
+                    {% endif %}
+                    <p>{{ ticket.title }}</p>
+                    <div class="col-md-3">
+                        <img class="img-fluid" src="{% static "" %}{{ ticket.image }}" alt="couverture livre">
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock review %}

@@ -6,48 +6,48 @@
     <h1 class="text-center mt-3">Vos posts</h1>
     {% for review in reviews  %}
         <div class="d-flex justify-content-center flex-column mt-5 border border-dark w-50 m-auto">
-        <div class="d-flex justify-content-between">
-            <p class="text-start p-2">Vous avez publié une critique</p>
-            <p class="text-end p-2">{{ review.time_created }}</p>
-        </div>
-        {% if review.rating == 5 %}
-            <p class="p-2">{{ review.headline }} - ★★★★★</p>
-        {% elif review.rating == 4 %}
-            <p class="p-2">{{ review.headline }} - ★★★★</p>
-        {% elif review.rating == 3 %}
-            <p class="p-2">{{ review.headline }} - ★★★</p>
-        {% elif review.rating == 2 %}
-            <p class="p-2">{{ review.headline }} - ★★</p>
-        {% elif review.rating == 1 %}
-            <p class="p-2">{{ review.headline }} - ★</p>
-        {% else %}
-            <p class="p-2">{{ review.headline }} - 0 étoile</p>
-        {% endif %}
-        <p class="p-2">{{ review.body }}</p>
-        {% for ticket in tickets  %}
-            {% if ticket.id == review.ticket_id %}
-                <div class="border border-dark m-2 p-2">
-                    {% if ticket.user != review.user %}
-                        <p>Ticket - {{ ticket.user }}</p>
-                    {% else %}
-                        <p>Ticket - Vous</p>
-                    {% endif %}
-                    <p>{{ ticket.title }}</p>
-                    <div class="col-md-3">
-                        <img class="img-fluid" src="{% static "" %}{{ ticket.image }}" alt="couverture livre">
-                    </div>
-                </div>
+            <div class="d-flex justify-content-between">
+                <p class="text-start p-2">Vous avez publié une critique</p>
+                <p class="text-end p-2">{{ review.time_created }}</p>
+            </div>
+            {% if review.rating == 5 %}
+                <p class="p-2">{{ review.headline }} - ★★★★★</p>
+            {% elif review.rating == 4 %}
+                <p class="p-2">{{ review.headline }} - ★★★★</p>
+            {% elif review.rating == 3 %}
+                <p class="p-2">{{ review.headline }} - ★★★</p>
+            {% elif review.rating == 2 %}
+                <p class="p-2">{{ review.headline }} - ★★</p>
+            {% elif review.rating == 1 %}
+                <p class="p-2">{{ review.headline }} - ★</p>
+            {% else %}
+                <p class="p-2">{{ review.headline }} - 0 étoile</p>
             {% endif %}
-        {% endfor %}
-        <div class="d-flex justify-content-end gap-3 m-2">
-            <form action="{% url 'edit-review' review.id %}">
-                <button class="btn btn-primary">Modifier</button>
-            </form>
-            <form action="{% url 'delete-review' review.id %}">
-                <button class="btn btn-primary">Supprimer</button>
-            </form>
+            <p class="p-2">{{ review.body }}</p>
+            {% for ticket in tickets  %}
+                {% if ticket.id == review.ticket_id %}
+                    <div class="border border-dark m-2 p-2">
+                        {% if ticket.user != review.user %}
+                            <p>Ticket - {{ ticket.user }}</p>
+                        {% else %}
+                            <p>Ticket - Vous</p>
+                        {% endif %}
+                        <p>{{ ticket.title }}</p>
+                        <div class="col-md-3">
+                            <img class="img-fluid" src="{% static "" %}{{ ticket.image }}" alt="couverture livre">
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="d-flex justify-content-end gap-3 m-2">
+                <form action="{% url 'edit-review' review.id %}">
+                    <button class="btn btn-primary">Modifier</button>
+                </form>
+                <form action="{% url 'delete-review' review.id %}">
+                    <button class="btn btn-primary">Supprimer</button>
+                </form>
+            </div>
         </div>
-    </div>
     {% endfor %}
     {% if tickets %}
         {% for ticket in tickets  %}
