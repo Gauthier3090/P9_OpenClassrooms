@@ -11,7 +11,7 @@
         </div>
         <p class="p-2">{{ post.title }}</p>
         <div class="d-flex justify-content-end gap-3 m-2">
-            {% if post.user != request.user and post.ticket_id < 0 %}
+            {% if post.user != request.user %}
                 <form action="{% url 'create-review' post.id %}">
                     <button class="btn btn-primary">Créer une critique</button>
                 </form>

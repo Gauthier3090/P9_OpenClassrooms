@@ -2,9 +2,10 @@ from core.forms import LoginForm, SignForm
 from django.contrib.auth import authenticate, logout, login
 from django.shortcuts import redirect, render
 from django.views.generic import View
-from django.db.models import Value, CharField
+from django.db.models import Value, CharField, Q
 from itertools import chain
 from ticketing.models import Review, Ticket
+from core.models import User
 
 
 class LoginPage(View):
@@ -68,7 +69,14 @@ class FluxPage(View):
     template = "flux.html"
 
     def get(self, request):
-        reviews = Review.objects.annotate(content_type=Value("REVIEW", CharField()))
-        tickets = Ticket.objects.annotate(content_type=Value("TICKET", CharField()))
-        posts = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
-        return render(request, self.template, context={'posts': posts, 'tickets': tickets})
+        reviews = Review.objects.select_related("ticket").filter(
+            Q(user__in=User.objects.filter(id=request.user.id).values("followed_by")) | Q(user=request.user)
+        )
+        reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
+        tickets = Ticket.objects.filter(
+            Q(user__in=User.objects.filter(id=request.user.id).values("followed_by")) | Q(user=request.user)
+        ).exclude(id__in=reviews.values("ticket_id"))
+        tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
+        all_tickets = Ticket.objects.all()
+        posts = sorted(chain(reviews, tickets), key=lambda post: (post.time_created), reverse=True)
+        return render(request, self.template, context={'posts': posts, 'tickets': all_tickets})

@@ -1,7 +1,6 @@
 import datetime
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import View, UpdateView, DeleteView, CreateView
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
@@ -12,11 +11,29 @@ class ReviewDeletePage(DeleteView):
     template_name = "review_confirm_delete.html"
     success_url = "/posts/"
 
+    def dispatch(self, request, *args, **kwargs):
+        self.user = self.request.user
+        if self.kwargs.get("pk"):
+            self.related_review_id = self.kwargs.get("pk")
+            self.related_review = get_object_or_404(Review, pk=self.related_review_id, user_id=self.user)
+            if self.related_review is None:
+                return HttpResponseRedirect(self.related_review)
+        return super(ReviewDeletePage, self).dispatch(request, *args, **kwargs)
+
 
 class TicketDeletePage(DeleteView):
     model = Ticket
     template_name = "ticket_confirm_delete.html"
     success_url = "/posts/"
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user = self.request.user
+        if self.kwargs.get("pk"):
+            self.related_ticket_id = self.kwargs.get("pk")
+            self.related_ticket = get_object_or_404(Ticket, pk=self.related_ticket_id, user_id=self.user)
+            if self.related_ticket is None:
+                return HttpResponseRedirect(self.related_ticket)
+        return super(TicketDeletePage, self).dispatch(request, *args, **kwargs)
 
 
 class ReviewModifyPage(UpdateView):
@@ -45,6 +62,15 @@ class ReviewModifyPage(UpdateView):
             print(review_form.errors)
         return super(ReviewModifyPage, self).post(request, **kwargs)
 
+    def dispatch(self, request, *args, **kwargs):
+        self.user = self.request.user
+        if self.kwargs.get("pk"):
+            self.related_review_id = self.kwargs.get("pk")
+            self.related_review = get_object_or_404(Review, pk=self.related_review_id, user_id=self.user)
+            if self.related_review is None:
+                return HttpResponseRedirect(self.related_review)
+        return super(ReviewModifyPage, self).dispatch(request, *args, **kwargs)
+
 
 class TicketModifyPage(UpdateView):
     model = Ticket
@@ -71,6 +97,15 @@ class TicketModifyPage(UpdateView):
         else:
             print(ticket_form.errors)
         return super(TicketModifyPage, self).post(request, **kwargs)
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user = self.request.user
+        if self.kwargs.get("pk"):
+            self.related_ticket_id = self.kwargs.get("pk")
+            self.related_ticket = get_object_or_404(Ticket, pk=self.related_ticket_id, user_id=self.user)
+            if self.related_ticket is None:
+                return HttpResponseRedirect(self.related_ticket)
+        return super(TicketModifyPage, self).dispatch(request, *args, **kwargs)
 
 
 class ReviewPage(View):
@@ -158,6 +193,8 @@ class CreateTicket(View):
             title = ticket_form.cleaned_data["title"]
             description = ticket_form.cleaned_data["description"]
             image = ticket_form.cleaned_data["image"]
+            if image is None:
+                image = "defaultpng"
             time_created = datetime.date.today()
             ticket = Ticket.objects.create(title=title, description=description, user=request.user,
                                            image=image, time_created=time_created)
