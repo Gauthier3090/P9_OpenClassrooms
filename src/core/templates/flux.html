@@ -10,11 +10,17 @@
             <button class="btn btn-primary">Créer une critique</button>
         </form>
     </div>
-    {% for post in posts %}
-        {% if post.content_type == "TICKET" %}
-            {% include "ticket.html" %}
-        {% elif post.content_type == "REVIEW" %}
-            {% include "review.html" %}
-        {% endif %}
-    {% endfor %}
+    {% if posts %}
+        {% for post in posts %}
+            {% if post.content_type == "TICKET" %}
+                {% include "ticket.html" %}
+            {% elif post.content_type == "REVIEW" %}
+                {% include "review.html" %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div class="d-flex justify-content-center align-items-center m-5">
+            <h3 class="fw-bolder">Aucun post. Abonnez-vous ou créez des posts.</h3>
+        </div>
+    {% endif %}
 {% endblock flux %}

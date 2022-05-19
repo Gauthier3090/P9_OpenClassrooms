@@ -36,3 +36,7 @@ input::placeholder {
     left: 50%;
     transform: translate(-50%, -5%);
 }
+
+.h-10 {
+    height: 10% !important;
+}

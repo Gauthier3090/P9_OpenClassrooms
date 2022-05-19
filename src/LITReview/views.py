@@ -1,10 +1,10 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 def index(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect("flux/")
+        return redirect("flux")
     return render(request, "login.html")
 
 

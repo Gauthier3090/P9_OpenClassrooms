@@ -3,14 +3,14 @@
 {% endblock %}
 {% block form-login %}
     <div class="d-flex align-items-center justify-content-center w-100 h-75">
-        <form class="form-control bg-light w-25 h-25" method="get" action="{% url 'signup' %}">
+        <form class="form-control bg-light w-25 h-50" method="get" action="{% url 'signup' %}">
             <h2 class="text-center m-3">Inscrivez-vous maintenant</h2>
             <div class="d-flex align-items-center justify-content-center h-25 p-2">
                 <label for="signup"></label>
                 <input type="submit" class="btn  btn-primary w-75" id="signup" value="S'inscrire">
             </div>
         </form>
-        <form class="form-control bg-light w-25 h-auto" method="post">
+        <form class="form-control bg-light w-25 h-50" method="post">
             <h2 class="text-center m-3">Connectez-vous</h2>
             <div class="form-group p-1">
               {% csrf_token %}

@@ -1,6 +1,6 @@
 import datetime
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View, UpdateView, DeleteView, CreateView
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket
@@ -126,6 +126,8 @@ class ReviewPage(View):
             title = ticket_form.cleaned_data["title"]
             description = ticket_form.cleaned_data["description"]
             image = ticket_form.cleaned_data["image"]
+            if image is None:
+                image = "default.png"
             time_created = datetime.date.today()
             headline = review_form.cleaned_data["headline"]
             comment = review_form.cleaned_data["comment"]
@@ -175,6 +177,7 @@ class CreateReview(CreateView):
             review = Review.objects.create(ticket=ticket, rating=rate, user=request.user, headline=headline,
                                            body=comment, time_created=time_created)
             review.save()
+            return redirect("flux")
         else:
             print(review_form.errors)
         return render(request, self.template, context={"form": review_form, "ticket": ticket})
@@ -194,12 +197,12 @@ class CreateTicket(View):
             description = ticket_form.cleaned_data["description"]
             image = ticket_form.cleaned_data["image"]
             if image is None:
-                image = "defaultpng"
+                image = "default.png"
             time_created = datetime.date.today()
             ticket = Ticket.objects.create(title=title, description=description, user=request.user,
                                            image=image, time_created=time_created)
             ticket.save()
-            return HttpResponseRedirect("flux")
+            return redirect("flux")
         else:
             print(ticket_form.errors)
         return render(request, self.template, context={"ticket": ticket_form})

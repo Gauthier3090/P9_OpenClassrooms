@@ -7,17 +7,17 @@
             {% else %}
             <p class="text-start p-2">Vous avez publié une critique</p>
             {% endif %}
-            <p class="text-end p-2">{{ review.time_created }}</p>
+            <p class="text-end p-2">{{ post.time_created }}</p>
         </div>
         {% if post.rating == 5 %}
             <p class="p-2">{{ post.headline }} - ★★★★★</p>
-        {% elif review.rating == 4 %}
+        {% elif post.rating == 4 %}
             <p class="p-2">{{ post.headline }} - ★★★★</p>
-        {% elif review.rating == 3 %}
+        {% elif post.rating == 3 %}
             <p class="p-2">{{ post.headline }} - ★★★</p>
-        {% elif review.rating == 2 %}
-            <p class="p-2">{{ post.headline }} - ★★</p>
-        {% elif review.rating == 1 %}
+        {% elif class.rating == 2 %}
+            <p post="p-2">{{ post.headline }} - ★★</p>
+        {% elif post.rating == 1 %}
             <p class="p-2">{{ post.headline }} - ★</p>
         {% else %}
             <p class="p-2">{{ post.headline }} - 0 étoile</p>
