@@ -1,5 +1,5 @@
 <div class="d-flex flex-column justify-content-center align-items-center w-50 h-25 m-auto bg-light border">
-    <h2 class="text-center mb-5">Abonnements</h2>
+    <h2 class="text-center">Abonnements</h2>
     <table class="table table-bordered table-dark w-75">
         <tbody>
             {% if not followers %}
@@ -9,8 +9,8 @@
             {% endif %}
             {% for i in followers %}
                 <tr>
-                    <td scope="row" class="text-start align-middle">{{ i }}</td>
-                    <td scope="row" class="text-end">
+                    <td class="text-start align-middle">{{ i }}</td>
+                    <td class="text-end">
                         <form action="{% url 'followers' %}" method="get" class="form-control bg-transparent border-0">
                             <button class="btn btn-primary" type="submit" name="unfollow" value="{{ i }}">Se désabonner</button>
                         </form>
