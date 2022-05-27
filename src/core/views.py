@@ -14,6 +14,8 @@ class LoginPage(View):
     form = LoginForm
 
     def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("flux")
         form = self.form
         message = ''
         return render(request, self.template, context={"form": form, "message": message})
@@ -73,7 +75,7 @@ class FluxPage(View):
         reviews = reviews.annotate(content_type=Value("REVIEW", CharField()))
         tickets = Ticket.objects.filter(Q(user_id__in=user) | Q(user=request.user))
         tickets = tickets.annotate(content_type=Value("TICKET", CharField()))
-        posts = sorted(chain(reviews, tickets), key=lambda post: (post.time_created), reverse=True)
+        posts = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
         all_tickets = Ticket.objects.all()
         all_reviews = Review.objects.all()
         return render(request, self.template, context={"posts": posts, 'tickets': all_tickets, 'reviews': all_reviews})

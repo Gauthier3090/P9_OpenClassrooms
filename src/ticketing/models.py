@@ -12,6 +12,7 @@ class Ticket(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
+        print(self)
         return reverse('posts')
 
 
@@ -24,4 +25,5 @@ class Review(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
+        print(self)
         return reverse('posts')
