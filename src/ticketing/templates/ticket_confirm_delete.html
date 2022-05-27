@@ -2,9 +2,9 @@
     {% include 'navbar.html' %}
 {% endblock header %}
 {% block confirm %}
-    <form method="post">
+    <form class="d-flex flex-column justify-content-center align-items-center vertical-center" method="post">
         {% csrf_token %}
-        <p>Voulez-vous supprimer le ticket suivant ? "{{ object.title }}"?</p>
-        <input type="submit" value="Confirm">
+        <p class="fw-bolder">Voulez-vous supprimer le ticket suivant ? "{{ object.title }}"?</p>
+        <input class="btn btn-danger" type="submit" value="Confirm">
     </form>
 {% endblock confirm %}

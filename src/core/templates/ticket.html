@@ -13,9 +13,10 @@
         <p class="p-2">{{ post.title }}</p>
         <div class="d-flex justify-content-end gap-3 m-2">
             {% check_review post.id as exist_review %}
-            {% if not exist_review %}
-                <form action="{% url 'create-review' post.id %}"></form>
-                <button class="btn btn-primary">Créer une critique</button>
+            {% if not exist_review and post.user != request.user %}
+                <form action="{% url 'create-review' post.id %}">
+                    <button class="btn btn-primary">Créer une critique</button>
+                </form>
             {% endif %}
         </div>
     </div>
