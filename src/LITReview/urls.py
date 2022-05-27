@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import index
+from core.views import LoginPage
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', index, name="index"),
+    path('', LoginPage.as_view(), name="index"),
     path('', include("core.urls")),
     path('following/', include("following.urls")),
     path('ticketing/', include("ticketing.urls")),

@@ -1,27 +1,24 @@
 {% block header %}
     {% include 'navbar.html' %}
 {% endblock %}
-{% block form-login %}
-    <div class="d-flex align-items-center justify-content-center w-100 h-75">
-        <form class="form-control bg-light w-25 h-50" method="get" action="{% url 'signup' %}">
-            <h2 class="text-center m-3">Inscrivez-vous maintenant</h2>
-            <div class="d-flex align-items-center justify-content-center h-25 p-2">
-                <label for="signup"></label>
-                <input type="submit" class="btn  btn-primary w-75" id="signup" value="S'inscrire">
-            </div>
+<div class="d-flex vertical-center">
+    <div class="d-flex flex-column align-items-center w-50">
+        <h1 class="text-center">Inscrivez-vous maintenant</h1>
+        <form method="get" action="{% url 'signup' %}">
+            <button class="btn btn-dark" type="submit">S'inscrire</button>
         </form>
-        <form class="form-control bg-light w-25 h-50" method="post">
-            <h2 class="text-center m-3">Connectez-vous</h2>
-            <div class="form-group p-1">
-              {% csrf_token %}
-              {{ form.as_p }}
-            </div>
+    </div>
+    <div class="d-flex flex-column align-items-center w-50">
+        <h1 class="text-center">Connectez-vous</h1>
+        <form class="container-fluid w-75" method="post">
+            {% csrf_token %}
+            {{ form }}
             <div class="d-flex justify-content-center p-2">
                 <small id="error" class="custom-small">{{ message }}</small>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary m-2">Se connecter</button>
+                <button class="btn btn-dark mt-3" type="submit">Se connecter</button>
             </div>
         </form>
     </div>
-{% endblock form-login %}
+</div>

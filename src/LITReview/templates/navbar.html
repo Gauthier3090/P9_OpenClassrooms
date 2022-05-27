@@ -7,30 +7,30 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
 </head>
 <body class="custom-body">
-    <nav class="navbar navbar-expand-lg custom-navbar h-10">
-        <div class="collapse navbar-collapse m-lg-2">
-            <a class="navbar-brand text-white fs-3 abs-center-x">LITReview</a>
-        </div>
-        {% block navbar %}
-            {% if user.is_authenticated %}
-                <div class="collapse navbar-collapse justify-content-end">
-                    <ul class="nav navbar-nav m-lg-2">
-                        <li class="nav-item active">
-                            <a class="nav-link text-white" href="{% url 'flux' %}">Flux</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'posts' %}">Posts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'followers' %}">Abonnements</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'logout' %}">Se déconnecter</a>
-                        </li>
-                    </ul>
-                </div>
-            {% endif %}
-        {% endblock navbar %}
-    </nav>
+    <header class="">
+        <nav class="navbar navbar-expand-lg bg-dark {% if not user.is_authenticated %} h-10 {% endif %}">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white fs-2 align-middle" href="#">LITReview</a>
+                {% if user.is_authenticated %}
+                    <div class="navbar d-flex ms-auto">
+                        <ul class="nav navbar-nav m-lg-2">
+                            <li class="nav-item active">
+                                <a class="nav-link text-white" href="{% url 'flux' %}">Flux</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'posts' %}">Posts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'followers' %}">Abonnements</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'logout' %}">Se déconnecter</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
 </body>
 </html>

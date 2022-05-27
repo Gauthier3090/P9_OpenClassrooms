@@ -16,8 +16,6 @@ class LoginPage(View):
     def get(self, request, *args, **kwargs):
         form = self.form
         message = ''
-        if request.user.is_authenticated:
-            logout(request)
         return render(request, self.template, context={"form": form, "message": message})
 
     def post(self, request, *args, **kwargs):
