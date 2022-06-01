@@ -28,6 +28,12 @@ La page des Posts permet à l'utilisateur de consulter l'ensemble de ses demande
 
 # Configurer un environnement virtuel Python et lancer le projet Django
 
+## Récupération du projet
+
+````Bash
+git clone https://github.com/Gauthier3090/P9_OpenClassrooms.git p9_django
+cd p9_django
+````
 ## Windows
 
 La création d'environnements virtuels est faite en exécutant la commande venv :
@@ -45,9 +51,12 @@ Pour commencer à utiliser l’environnement virtuel, il doit être activé :
 Pour lancer le projet Django:
 
 ````Bash
+pip install -r requirements.txt
 cd .\src
 py .\manage.py runserver
 ````
+
+Dans le navigateur de votre choix, se rendre à l'adresse http://127.0.0.1:8000/
 
 ## Unix
 
@@ -66,6 +75,9 @@ source venv/bin/activate
 Pour lancer le projet Django:
 
 ````Bash
+pip install -r requirements.txt
 cd .\src
 python3 .\manage.py runserver
 ````
+
+Dans le navigateur de votre choix, se rendre à l'adresse http://127.0.0.1:8000/
