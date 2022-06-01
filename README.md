@@ -46,12 +46,12 @@ Pour commencer à utiliser l’environnement virtuel, il doit être activé :
 
 ````Bash
 .\venv\Scripts\activate.bat
+pip install -r requirements.txt
 ````
 
 Pour lancer le projet Django:
 
 ````Bash
-pip install -r requirements.txt
 cd .\src
 py .\manage.py runserver
 ````
@@ -70,12 +70,12 @@ Pour commencer à utiliser l’environnement virtuel, il doit être activé :
 
 ````Bash
 source venv/bin/activate
+pip install -r requirements.txt
 ````
 
 Pour lancer le projet Django:
 
 ````Bash
-pip install -r requirements.txt
 cd .\src
 python3 .\manage.py runserver
 ````
