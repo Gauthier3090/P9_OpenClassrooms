@@ -7,6 +7,9 @@ from following.models import Follower
 
 
 class FollowersPage(View):
+    """
+        View class to create a follower page.
+    """
     page = "followers.html"
     form = FollowersForm
 
